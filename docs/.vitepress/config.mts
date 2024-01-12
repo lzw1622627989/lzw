@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 import { navList } from '../router/nav'
 import { sidebarList } from "../router/sidebar";
 export default defineConfig({
-  base:'/lzw/',
+  base: "/lzw/",
   title: "程序猿爱瞎逛",
   description: ".....",
   markdown: {
@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    logo: "/avatar.jpg",
+    logo: "/lzw.ico",
     // https://vitepress.dev/reference/default-theme-config
     nav: navList,
     sidebar: sidebarList,

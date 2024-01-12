@@ -16,7 +16,7 @@
 import { type StyleValue } from 'vue'
 const props= defineProps<{ styleObj: StyleValue,childenStyle?:StyleValue }>();
 
-console.log(props)
+// console.log(props)
 </script>
 
 <style scoped>
