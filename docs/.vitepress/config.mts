@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    logo: "/lzw.ico",
+    logo: "/avatar.jpg",
     // https://vitepress.dev/reference/default-theme-config
     nav: navList,
     sidebar: sidebarList,
@@ -42,6 +42,6 @@ export default defineConfig({
     // "pages/:pkg/index.md": ":pkg/index.md",
     "pages/:pkg/(.*)": ":pkg/(.*)",
   },
-  head: [["link", { rel: "icon", href: "/avatar.jpg" }]],
+  head: [["link", { rel: "icon", href: "/lzw/lzw.ico" }]],
   lastUpdated: true,
 });
