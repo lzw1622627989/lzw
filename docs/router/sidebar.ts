@@ -39,8 +39,10 @@ export const sidebarList: DefaultTheme.Sidebar = {
   "/JS": [
     {
       text: "JS",
-      items: [{ text: "js", link: "/JS/" }],
-      items: [{ text: "promise", link: "/JS/promise.md" }],
+      items: [
+        { text: "js", link: "/JS/" },
+        { text: "promise", link: "/JS/promise.md" }
+      ],
     },
   ],
   "/LINK": [
