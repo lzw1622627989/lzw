@@ -2,9 +2,9 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 hero:
-  name: "学习vitepress"
-  text: "???"
-  tagline: "...."
+  name: "web前端小知识"
+  text: "个人收集"
+  tagline: "💯"
   image: "/avatar.jpg"
   # actions:
   #   - theme: brand
