@@ -42,6 +42,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "js", link: "/JS/" },
         { text: "string对象", link: "/JS/string.md" },
+        { text: "array数组对象", link: "/JS/array.md" },
         { text: "promise对象", link: "/JS/promise.md" },
       ],
     },

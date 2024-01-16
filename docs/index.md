@@ -3,7 +3,7 @@
 layout: home
 hero:
   name: "web前端小知识"
-  text: "个人收集"
+  text: "学无止境！！！"
   tagline: "💯"
   image: "/avatar.jpg"
   # actions:
