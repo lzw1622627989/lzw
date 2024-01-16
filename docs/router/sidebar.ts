@@ -3,7 +3,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
   "/VUE/": [
     // {
     //   text: "Examples",
-     
+
     //   items: [
     //     { text: "Markdown Examples", link: "/markdown-examples" },
     //     { text: "test", link: "/test" },
@@ -30,9 +30,9 @@ export const sidebarList: DefaultTheme.Sidebar = {
       text: "CSS",
       items: [
         { text: "css小技巧", link: "/CSS/" },
-        {text:"flex布局",link:'/CSS/flex.md'},
-        {text:"grid布局",link:'/CSS/grid.md'},
-        {text:"图像滤镜",link:'/CSS/filter.md'},
+        { text: "flex布局", link: "/CSS/flex.md" },
+        { text: "grid布局", link: "/CSS/grid.md" },
+        { text: "图像滤镜", link: "/CSS/filter.md" },
       ],
     },
   ],
@@ -41,7 +41,8 @@ export const sidebarList: DefaultTheme.Sidebar = {
       text: "JS",
       items: [
         { text: "js", link: "/JS/" },
-        { text: "promise", link: "/JS/promise.md" }
+        { text: "string对象", link: "/JS/string.md" },
+        { text: "promise对象", link: "/JS/promise.md" },
       ],
     },
   ],
