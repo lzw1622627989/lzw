@@ -261,7 +261,7 @@ console.log(arr.lastIndexOf(4)); //3
 console.log(arr.lastIndexOf(5)); //-1
 ```
 
-##
+## fill()
 
 - fill(value[, start[, end]]) 用于使用特定值填充数组的某些或所有元素。
   > value：必需。要填充数组的元素值。  

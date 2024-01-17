@@ -13,3 +13,59 @@
 |符号（Symbol）|表示独一无二的值，用于对象属性的标识符。|  
 
 
+## String方法
+|方法|描述|
+|:---:|:---:|
+|[charAt()](/JS/string.md#charat)|返回指定位置的字符|
+|[charCodeAt()](/JS/string.md#charcodeat)|返回在指定的位置的字符的 Unicode 编码|
+|[concat()](/JS/string.md#concat)|连接两个或更多字符串，并返回新的字符串|
+|[includes()](/JS/string.md#includes)|判断字符串是否包含指定的子字符串|
+|[indexOf()](/JS/string.md#indexof)|返回一个指定的字符串值在字符串中首次出现的位置,如果没有找到，则返回-1|
+|[lastIndexOf()](/JS/string.md#lastindexof)|从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置|
+|[match()](/JS/string.md#match)|返回一个包含匹配结果的数组或 null|
+|[replace()](/JS/string.md#replace)|在字符串中查找匹配的子串，并替换与正则表达式匹配的子串|
+|[slice()](/JS/string.md#slice)|提取字符串的片断，并在新的字符串中返回被提取的部分|
+|[trim()](/JS/string.md#trim)|去除字符串两边的空白|
+|[trimStart()/trimLeft()](/JS/string.md#trimstart-trimleft)|去除左侧的空白字符|
+|[trimEnd()/trimRight()](/JS/string.md#trimend-trimright)|去除右侧的空白字符|
+|[startsWith()](/JS/string.md#startswith)|判断字符串是否以指定的前缀开始|
+|[endsWith()](/JS/string.md#endswith)|判断字符串是否以指定的后缀结束|
+|[repeat()](/JS/string.md#repeat)|复制字符串指定次数，并将它们连接在一起返回|
+|[search()](/JS/string.md#search)|查找与正则表达式相匹配的值|
+|[split()](/JS/string.md#split)|把字符串分割为字符串数组|
+|[substr()](/JS/string.md#substr)|从起始索引号提取字符串中指定数目的字符|
+|[substring()](/JS/string.md#substring)|提取字符串中两个指定的索引号之间的字符|
+|[toLowerCase()](/JS/string.md#tolowercase)|把字符串转换为小写|
+|[toUpperCase()](/JS/string.md#touppercase)|把字符串转换为大写|
+|[padStart()](/JS/string.md#padstart)|在当前字符串开始处用指定的字符串填充至指定长度|
+|[padEnd()](/JS/string.md#padend)|在当前字符串结尾处用指定的字符串填充至指定长度|
+|[valueOf()](/JS/string.md#valueof)|返回某个字符串对象的原始值|
+|[toString()](/JS/string.md#tostring)|返回一个字符串|
+
+## Array方法
+|方法|描述|
+|:---:|:---:|
+|[push()](/JS/array.md#push)|向数组的末尾添加一个或多个元素，并返回新的长度|
+|[unshift()](/JS/array.md#unshift)|向数组的开头添加一个或更多元素，并返回新的长度|
+|[shift()](/JS/array.md#shift)|删除并返回数组的第一个元素|
+|[pop()](/JS/array.md#pop)|删除并返回数组的最后一个元素|
+|[slice()](/JS/array.md#slice)|选取数组的一部分，并返回一个新数组|
+|[splice()](/JS/array.md#splice)|从数组中添加或删除元素|
+|[sort()](/JS/array.md#sort)|对数组的元素进行排序|
+|[reverse()](/JS/array.md#reverse)|反转数组的元素顺序|
+|[concat()](/JS/array.md#concat)|连接两个或更多的数组，并返回结果|
+|[includes()](/JS/array.md#includes)|判断一个数组是否包含一个指定的值|
+|[find()](/JS/array.md#find)|返回符合传入测试（函数）条件的数组元素|
+|[findIndex()](/JS/array.md#findindex)|返回符合传入测试（函数）条件的数组元素索引|
+|[forEach()](/JS/array.md#foreach)|数组每个元素都执行一次回调函数|
+|[map()](/JS/array.md#map)|通过指定函数处理数组的每个元素，并返回处理后的数组|
+|[reduce()](/JS/array.md#reduce)|将数组元素计算为一个值（从左到右）|
+|[reduceRight()](/JS/array.md#reduceright)|将数组元素计算为一个值（从右到左）|
+|[some()](/JS/array.md#some)|检测数组元素中是否有元素符合指定条件|
+|[every()](/JS/array.md#every)|检测数值元素的每个元素是否都符合条件|
+|[filter()](/JS/array.md#filter)|检测数值元素，并返回符合条件所有元素的数组|
+|[indexOf()](/JS/array.md#indexof)|搜索数组中的元素，并返回它所在的位置|
+|[lastIndexOf()](/JS/array.md#lastindexof)|搜索数组中的元素，并返回它最后出现的位置|
+|[fill()](/JS/array.md#fill)|使用一个固定值来填充数组|
+|[join()](/JS/array.md#join)|把数组的所有元素放入一个字符串|
+|[toString()](/JS/array.md#tostring)|把数组转换为字符串，并返回结果|
