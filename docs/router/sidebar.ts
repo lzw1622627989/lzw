@@ -16,7 +16,10 @@ export const sidebarList: DefaultTheme.Sidebar = {
 
     {
       text: "VUE",
-      items: [{ text: "vue", link: "/VUE/" }],
+      items: [
+        { text: "vue2", link: "/VUE/" },
+        { text: "vue3", link: "/VUE/vue3.md" },
+      ],
     },
   ],
   "/HTML": [
