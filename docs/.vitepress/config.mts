@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 import { navList } from '../router/nav'
 import { sidebarList } from "../router/sidebar";
+
 export default defineConfig({
   base: "/lzw/",
   title: "程序猿爱瞎逛",

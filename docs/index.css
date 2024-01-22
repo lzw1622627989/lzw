@@ -4,3 +4,13 @@
 .logo{
     border-radius: 50%; 
 }
+.buttons{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.inputs{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
