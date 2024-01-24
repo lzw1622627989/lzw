@@ -475,6 +475,327 @@ import {ref,watch} from "vue"
 <WatchTest></WatchTest>
 :::
 
+## watchEffect()  
+- 立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行该函数
+- `watch`对比`watchEffect`  
+> 1. 都能监听响应式数据的变化，不同的是监听数据变化的方式不同  
+> 2. `watch`：要明确指出监视的数据  
+> 3. `watchEffect`：不用明确指出监视的数据（函数中用到哪些属性，那就监视哪些属性）  
+```vue
+<template>
+    <div>当水温达到80°或水位达到10</div>
+    <div>水温：{{temp}}°</div>
+    <div>水位：{{height}}</div>
+    <div>警报是否响起：{{istrue}}</div>
+    <button @click="changeTemp">温度+10</button>
+    <button @click="changeHeight">水位+1</button>
+</template>
+<script lang="ts" setup>
+  import {ref,watch,watchEffect} from "vue"
+
+    const temp =ref(0);
+    const height=ref(0);
+    const istrue =ref(false);
+
+    // watch实现
+    watch([temp,height],(value)=>{
+        const [newTemp,newHeight]=value;
+        if(newTemp>=80 || newHeight>=10 ){
+            istrue.value=true;
+        }else{
+            istrue.value=false;
+        }
+    })
+
+    // watchEffect实现
+    watchEffect(()=>{
+        if(temp.value>=80 || height.value>=10){
+            istrue.value=true;
+        }else{
+            istrue.value=false;
+        }
+    })
+    function changeTemp(){
+        temp.value+=10;
+    }
+    function changeHeight(){
+        height.value+=1;
+    }
+</script>
+```  
+- 实例  
+
+:::info watchEffect()实例  
+<WatchEffectTest></WatchEffectTest>
+:::  
+
+## 标签上的ref属性  
+- **作用**：用于注册模板引用。  
+> 1. 用在普通`DOM`标签上，获取的是`DOM`节点。  
+> 2. 用在组件标签上，获取的是组件实例对象。  
+
+- 作用普通标签  
+```vue
+<template>
+    <div ref="dom">123456</div>
+    <button @click="getContent">点击获取dom内容</button>
+</template>
+<script lang="ts" setup>
+    const dom =ref();
+    
+    function getContent(){
+        console.log(dom.value.innerText);//123456
+    }
+</script>
+```  
+- 作用组件实例  
+::: code-group 
+```vue [App.vue] 
+    <template>
+        <Hello ref="hello"></Hello>
+        <button @click="getContent">获取Hello组件内容</button>
+    </template>
+    <script lang="ts" setup>
+        import Hello from 'Hello.vue'
+        import {ref} from "vue"
+        const hello =ref()
+
+        function getContent(){
+            console.log(hello.value);
+            console.log(hello.value.name);//小米
+            console.log(hello.value.age);//20
+        }
+    </script>
+```
+
+```vue [Hello.vue] 
+    <template>
+        <div>名字:{{name}}</div>
+        <div>年龄：{{age}}</div>
+    </template>
+    <script lang="ts" setup>
+        import {ref} from "vue"
+
+        const name =ref('小米');
+        const age =ref(20);
+        // 使用defineExpose将组件中的数据交给外部
+        defineExpose({name,age})
+    </script>
+```
+
+:::
+
+## 生命周期  
+> 创建阶段：`setup`  
+> 挂载阶段：`onBeforeMount`、`onMounted`  
+> 更新阶段：`onBeforeUpdate`、`onUpdated`  
+> 卸载阶段：`onBeforeUnmount`、`onUnmounted`     
+```vue
+<template>
+    <div>sum:{{sum}}</div>
+    <button @click="changeSum">sum+1</button>
+</template>
+<script lang="ts" setup>
+    import { 
+    ref, 
+    onBeforeMount, 
+    onMounted, 
+    onBeforeUpdate, 
+    onUpdated, 
+    onBeforeUnmount, 
+    onUnmounted 
+  } from 'vue'
+
+  const sum=ref(0)
+
+console.log('setup');
+onBeforeMount(()=>{
+    console.log('挂载之前')
+  })
+  onMounted(()=>{
+    console.log('挂载完毕')
+  })
+  onBeforeUpdate(()=>{
+    console.log('更新之前')
+  })
+  onUpdated(()=>{
+    console.log('更新完毕')
+  })
+  onBeforeUnmount(()=>{
+    console.log('卸载之前')
+  })
+  onUnmounted(()=>{
+    console.log('卸载完毕')
+  })
+
+function changeSum(){
+    sum.value+=1
+}
+</script>
+```  
+
+## shallowRef() && shallowReactive()   
+> 通过使用 [`shallowRef()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowref) 和 [`shallowReactive()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) 来绕开深度响应。浅层式 `API` 创建的状态只在其顶层是响应式的，对所有深层的对象不会做任何处理，避免了对每一个内部属性做响应式所带来的性能成本，这使得属性的访问变得更快，可提升性能。 
+- shallowRef()  
+> **作用**：创建一个响应式数据，但只对顶层属性进行响应式处理  
+> **特点**：只跟踪引用值的变化，不关心值内部的属性变化  
+```vue
+<template>
+    <div>sum:{{ sum }}</div>
+   <div>person名字：{{  person.name}}</div>
+   <div>person年龄：{{  person.age}}</div>
+   <button @click="changeSum"  >sum+1</button> 
+   <button @click="changeName"  >修改名字</button> 
+   <button @click="changeAge"  >修改年龄</button> 
+   <button @click="changePerson"  >修改person</button>
+</template>
+<script lang="ts" setup>
+import { shallowRef } from "vue"
+
+    const sum = shallowRef(0);
+    const person = shallowRef({ name: "小米", age: 15 });
+
+function changeSum() {
+        sum.value += 1;//触发更改
+ }
+function changeAge() {
+    person.value.age += 1;//不会触发更改
+    console.log(person.value)
+}
+function changeName() {
+    person.value.name = "小明";//不会触发更改
+    console.log(person.value)
+}
+function changePerson() {
+    person.value = { name: "小红", age: 10 };//会触发更改
+    console.log(person.value)
+}
+
+</script>
+```
+
+
+- shallowReactive()  
+> **作用**：创建一个浅层响应式对象，只会使对象的最顶层属性变成响应式的，对象内部的嵌套属性则不会变成响应式的  
+> **特点**：对象的顶层属性是响应式的，但嵌套对象的属性不是  
+```vue 
+<template>
+    <div>车名：{{ car.name }}</div>
+   <div>车价格：{{ car.options.price }}</div>
+   <div>车颜色：{{ car.options.color }}</div>
+   <button @click="changeCarName"  >修改车名</button> 
+   <button @click="changeCarPrice"  >修改车价格</button> 
+   <button @click="changeCarColor"  >修改车颜色</button> 
+</template>
+<script lang="ts" setup>
+import {shallowReactive } from "vue"
+const car = shallowReactive({
+    name: "保时捷",
+    options: {
+        color: '白',
+        price:45
+    }
+})
+function changeCarColor() {
+    car.options.color = "黑";//不会触发更改
+    console.log(car)
+}
+function changeCarPrice() {
+    car.options.price = 100;//不会触发更改
+    console.log(car)
+}
+
+function changeCarName() {
+    car.name = "宝马";//会触发更改
+    console.log(car)
+}
+</script>
+
+```
+
+
+- 实例  
+::: info shallowRef() && shallowReactive() 实例 
+
+<ShallowRefTest></ShallowRefTest>
+:::  
+
+## readonly() && shallowReadonly()  
+- readonly 
+> 1. **作用**：用于创建一个对象的深只读副本。  
+> 2. **特点**：对象的所有嵌套属性都将变为只读,任何尝试修改这个对象的操作都会被阻止（在开发模式下，还会在控制台中发出警告）  
+> 3. **应用场景**: 创建不可变的状态快照,保护全局状态或配置不被修改   
+```vue 
+<template>
+    <div>sum:{{ sum }}</div>
+    <div>sum1:{{ sum1 }}</div>
+    <button @click="changeSum" >sum+1</button> 
+    <button @click="changeSum1" >sum1+1</button>
+</template>
+
+<script setup lang="ts">
+import { ref,readonly } from 'vue'
+
+const sum = ref(0);
+const sum1 = readonly(sum)
+
+function changeSum() {
+    sum.value += 1;
+}
+function changeSum1() {
+    sum1.value += 1;//无法修改：Set operation on key "value" failed: target is readonly
+}
+</script>
+```
+
+
+
+- shallowReadonly  
+>1. **作用**：与 `readonly` 类似，但只作用于对象的顶层属性  
+>2. **特点**：只将对象的顶层属性设置为只读，对象内部的嵌套属性仍然是可变的，适用于只需保护对象顶层属性的场景   
+```vue
+<template>
+    <div>car1：{{ car1}}</div>
+    <div>car2：{{ car2}}</div>
+    <button @click="changeCarName" >修改车名（car2）</button>
+    <button @click="changeCarColor" >修改车颜色（car2）</button>
+    <button @click="changeCarPrice" >修改车价格（car2）</button>
+</template>
+
+<script setup lang="ts">
+import { reactive,shallowReadonly } from 'vue'
+
+
+const car1 = reactive({
+    name: "保时捷",
+    options: {
+        color: "白",
+        price:100
+    }
+})
+const car2 =shallowReadonly(car1)
+
+
+function changeCarName() {
+    car2.name = "宝马";//无法修改 ：Set operation on key "name" failed: target is readonly
+}
+
+function changeCarColor() {
+    car2.options.color = "黑";//可以修改
+}
+
+function changeCarPrice() {
+    car2.options.price = 80;//可以修改
+}
+</script>
+```
+
+- 实例  
+::: info readonly() && shallowReadonly() 实例 
+<ReadonlyTest></ReadonlyTest>
+:::
+
+
 
 
 <script setup>
@@ -484,5 +805,8 @@ import ReactiveTest from './components/reactive.vue';
 import TorefsTest from './components/torefs.vue';
 import ComputedTest from './components/computed.vue';
 import WatchTest from './components/watch.vue';
+import WatchEffectTest from './components/watchEffect.vue';
+import ShallowRefTest from './components/shallowRef.vue';
+import ReadonlyTest from './components/readonly.vue';
 </script>
 
