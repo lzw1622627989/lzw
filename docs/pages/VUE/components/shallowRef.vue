@@ -6,12 +6,12 @@
    <div>车价格：{{ car.options.price }}</div>
    <div>车颜色：{{ car.options.color }}</div>
    <button @click="changeSum" class="buttons" >sum+1</button> <br>
-   <button @click="changeName" class="buttons" >修改名字</button> <br>
-   <button @click="changeAge" class="buttons" >修改年龄</button> <br>
-   <button @click="changePerson" class="buttons" >修改person</button> <br>
+   <button @click="changeName" class="buttons" >修改名字</button> 
+   <button @click="changeAge" class="buttons" >修改年龄</button>
+   <button @click="changePerson" class="buttons" >修改person</button> 
    <button @click="changeCarName" class="buttons" >修改车名</button> <br>
-   <button @click="changeCarPrice" class="buttons" >修改车价格</button> <br>
-   <button @click="changeCarColor" class="buttons" >修改车颜色</button> <br>
+   <button @click="changeCarPrice" class="buttons" >修改车价格</button> 
+   <button @click="changeCarColor" class="buttons" >修改车颜色</button> 
 </template>
 
 <script setup lang="ts">

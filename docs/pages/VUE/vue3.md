@@ -60,6 +60,7 @@ Add Prettier for code formatting?  Yes/No
     }
 </script>  
 ```  
+
 ## CompositionAPI(组合式API,基于vue3)  
 > 可以用函数的方式，更加优雅的组织代码，让相关功能的代码更加有序的组织在一起。  
 ```vue 
@@ -94,6 +95,7 @@ import {watch,computed} from 'vue'
     }
 </script>
 ```  
+
 ## setup 概述  
 > `setup`是`Vue3`中一个新的配置项，值是一个函数，它是 `Composition API` **“表演的舞台**_**”**_，组件中所用到的：数据、方法、计算属性、监视......等等，均配置在`setup`中。  
 - `setup`函数返回的对象中的内容，可直接在模板中使用  
@@ -136,6 +138,7 @@ import {watch,computed} from 'vue'
     }
 </script>
 ```  
+
 ## setup 语法糖
 ```vue 
 <template>
@@ -153,6 +156,7 @@ function changeAge(){
 }
 </script>
 ```  
+
 ## ref() 
 - **作用：** 定义响应式变量。  
 - **语法：**`let xxx = ref(初始值)`。  
@@ -795,7 +799,81 @@ function changeCarPrice() {
 <ReadonlyTest></ReadonlyTest>
 :::
 
+## toRaw() && markRaw()  
+- toRaw  
+> **作用**：用于获取一个响应式对象的原始对象， `toRaw` 返回的对象不再是响应式的，不会触发视图更新   
+```vue 
+<template>
+    <div>car:{{  car}}</div>
+    <div>rawCar:{{ rawCar }}</div>
+    <button @click="changeRawPesonName"  >修改rawCar名字</button>
+    <button @click="changerawCarPrice"  >修改rawCar价格</button>
+    <button @click="changerawCar" >修改rawCar</button>
+</template>
 
+<script setup lang="ts">
+import {reactive, toRaw,markRaw } from 'vue'
+
+
+const car = reactive({ name: "保时捷", price: 100 });
+let rawCar = toRaw(car)
+
+function changeRawPesonName() {
+    rawCar.name = "宝马";//页面不更新 rawCar不是响应式数据
+    console.log(rawCar)
+}
+
+function changerawCarPrice() {
+    rawCar.price = 80;//页面不更新 rawCar不是响应式数据
+    console.log(rawCar)
+}
+function changerawCar() {
+    rawCar = { name: "奔驰", price: 90 };//页面不更新 rawCar不是响应式数据
+    console.log(rawCar)
+}
+</script>
+
+```
+
+- markRaw  
+> **作用**：标记一个对象，使其**永远不会**变成响应式的  
+``` vue 
+<template>
+    <div>person:{{ person }}</div>
+    <div>marPerson:{{ marPerson }}</div>
+    <button @click="changemarPersonName" class="buttons">修改marPerson名字</button>
+    <button @click="changemarPersonAge" class="buttons">修改marPerson年龄</button>
+    <button @click="changemarPerson" class="buttons">修改marPerson</button>
+</template>
+
+<script setup lang="ts">
+import {reactive, toRaw,markRaw } from 'vue'
+
+const person = markRaw({ name: '小米', age: 20 });
+const marPerson =reactive(person)
+
+
+function changemarPersonName() {
+    marPerson.name = "小红";//页面不更新 marPerson不是响应式数据
+    console.log(marPerson)
+}
+function changemarPersonAge() {
+    marPerson.age = 30;//页面不更新 marPerson不是响应式数据
+    console.log(marPerson)
+}
+function changemarPerson() {
+    Object.assign(marPerson, { name: "小刚", age: 8 });//页面不更新 marPerson不是响应式数据
+    console.log(marPerson)
+}
+</script>
+
+
+```
+
+- 实例 
+::: info toRaw() && markRaw() 实例
+<TorawTest></TorawTest>
+:::
 
 
 <script setup>
@@ -808,5 +886,6 @@ import WatchTest from './components/watch.vue';
 import WatchEffectTest from './components/watchEffect.vue';
 import ShallowRefTest from './components/shallowRef.vue';
 import ReadonlyTest from './components/readonly.vue';
+import TorawTest from './components/toraw.vue';
 </script>
 
