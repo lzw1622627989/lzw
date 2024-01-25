@@ -19,6 +19,9 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "vue2", link: "/VUE/" },
         { text: "vue3", link: "/VUE/vue3.md" },
+        { text: "vue3组件通信", link: "/VUE/communication.md" },
+        { text: "router路由", link: "/VUE/router.md" },
+        { text: "pinia状态管理", link: "/VUE/pinia.md" },
       ],
     },
   ],
