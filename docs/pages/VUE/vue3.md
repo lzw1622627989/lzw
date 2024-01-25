@@ -875,6 +875,53 @@ function changemarPerson() {
 <TorawTest></TorawTest>
 :::  
 
+## customRef()  
+> **作用**：创建一个自定义的`ref`，并对其依赖项跟踪和更新触发进行逻辑控制。  
+
+::: code-group 
+  ```ts [useSumRef.ts] 
+  import {customRef } from "vue";
+  export default function(initValue:string,delay:number){
+  let msg = customRef((track,trigger)=>{
+    let timer:number
+    return {
+      get(){
+        track() // 告诉Vue数据msg很重要，要对msg持续关注，一旦变化就更新
+        return initValue
+      },
+      set(value){
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          initValue = value
+          trigger() //通知Vue数据msg变化了
+        }, delay);
+      }
+    }
+  }) 
+  return {msg}
+}
+  ```
+  ```vue [app.vue]
+  <template>
+    <div>{{msg}}</div>
+    <input type="text" v-model="msg">
+  </template>
+  <script setup lang="ts">
+    import useMsgRef from './useMsgRef'
+
+    // 使用useMsgRef来定义一个响应式数据且有延迟效果
+    let {msg} =useMsgRef('hello',2000)
+  </script>
+
+  ```
+
+:::  
+
+- 实例  
+:::info customRef()实例  (数据变化2秒后视图再更新)
+<CustomRefTest></CustomRefTest>
+:::
+
 ## 工具函数  
 - isRef()  
 > **作用**：检查某个值是否为 ref。  
@@ -914,5 +961,6 @@ import ShallowRefTest from './components/shallowRef.vue';
 import ReadonlyTest from './components/readonly.vue';
 import TorawTest from './components/toraw.vue';
 import ToolTest from './components/tool.vue';
+import CustomRefTest from './components/customRef.vue';
 </script>
 
