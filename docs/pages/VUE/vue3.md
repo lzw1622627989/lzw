@@ -922,6 +922,45 @@ function changemarPerson() {
 <CustomRefTest></CustomRefTest>
 :::
 
+
+## Teleport组件  
+> **作用**：是一种能够将我们的**组件html结构**移动到指定位置的技术。  
+> `props` :{`to`: string | HTMLElement, `disabled`?: boolean}  
+>> to:必填项。指定目标容器。 可以是选择器或实际元素。  
+>> disabled:  当值为 `true` 时，内容将保留在其原始位置 而不是移动到目标容器中。可以动态更改。  
+```vue  
+<teleport to='body' >
+    <div class="modal" v-show="isShow">
+      <h2>我是一个弹窗</h2>
+      <p>我是弹窗中的一些内容</p>
+      <button @click="isShow = false">关闭弹窗</button>
+    </div>
+</teleport>
+```  
+
+## Suspense组件  
+> **作用**：等待异步组件时渲染一些额外内容，让应用有更好的用户体验   
+> `props`:{`timeout`?: string | number}  
+> **用法**:接受两个插槽：#default 和 #fallback。它将在内存中渲染默认插槽的同时展示后备插槽内容。  
+```vue 
+<template>
+    <Suspense>
+          <template v-slot:default>
+            <Child/>
+          </template>
+          <template v-slot:fallback>
+            <div>加载中.......</div>
+          </template>
+    </Suspense>
+</template>
+<script lang="ts" setup>
+import { defineAsyncComponent,Suspense } from "vue";
+const Child = defineAsyncComponent(()=>import('./Child.vue'))
+
+</script>
+
+```
+
 ## 工具函数  
 - isRef()  
 > **作用**：检查某个值是否为 ref。  
