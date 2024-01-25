@@ -873,6 +873,32 @@ function changemarPerson() {
 - 实例 
 ::: info toRaw() && markRaw() 实例
 <TorawTest></TorawTest>
+:::  
+
+## 工具函数  
+- isRef()  
+> **作用**：检查某个值是否为 ref。  
+> 注意 ： 不用 **.value**  (无法在模版上使用)  
+
+- unref()  
+> **作用**：如果参数是 ref，则返回内部值，否则返回参数本身  
+
+- toValue()  
+> **作用**：将值、refs 或 getters 规范化为值。 
+
+- isProxy()  
+> **作用**：检查一个对象是否是由 reactive()、readonly()、shallowReactive() 或 shallowReadonly() 创建的代理。  
+
+- isReactive()  
+> **作用**：检查一个对象是否是由 reactive() 或 shallowReactive() 创建的代理。  
+
+- isReadonly()  
+> **作用**：检查传入的值是否为只读对象。只读对象的属性可以更改，但他们不能通过传入的对象直接赋值。
+
+
+::: info 工具函数实例
+<ToolTest></ToolTest>
+
 :::
 
 
@@ -887,5 +913,6 @@ import WatchEffectTest from './components/watchEffect.vue';
 import ShallowRefTest from './components/shallowRef.vue';
 import ReadonlyTest from './components/readonly.vue';
 import TorawTest from './components/toraw.vue';
+import ToolTest from './components/tool.vue';
 </script>
 
