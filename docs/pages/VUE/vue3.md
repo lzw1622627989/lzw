@@ -589,6 +589,69 @@ import {ref,watch} from "vue"
 
 :::
 
+## props  
+:::code-group 
+```ts [props.ts] 
+// 定义一个接口，限制每个Person对象的格式
+export interface PersonInter {
+id:string,
+name:string,
+ age:number
+}
+
+// 定义一个自定义类型Persons
+export type Persons = Array<PersonInter>
+```
+```vue [person.vue]
+<template>
+<div class="person">
+<ul>
+  <li v-for="item in list" :key="item.id">
+     {{item.name}}--{{item.age}}
+   </li>
+ </ul>
+</div>
+</template>
+
+<script lang="ts" setup >
+import {defineProps} from 'vue'
+import {type PersonInter} from './props.ts'
+
+// 第一种写法：仅接收
+// const props = defineProps(['list'])
+
+// 第二种写法：接收+限制类型
+// defineProps<{list:Persons}>()
+
+// 第三种写法：接收+限制类型+指定默认值+限制必要性
+let props = withDefaults(defineProps<{list?:Persons}>(),{
+  list:()=>[{id:'asdasg01',name:'小猪佩奇',age:18}]
+})
+console.log(props)
+</script>
+```
+```vue [app.vue]
+<template>
+	<Person :list="persons"/>
+</template>
+
+<script lang="ts" setup name="App">
+import Person from './Person.vue'
+import {reactive} from 'vue'
+ import {type Persons} from './props.ts'
+
+ let persons = reactive<Persons>([
+  {id:'e98219e12',name:'张三',age:18},
+   {id:'e98219e13',name:'李四',age:19},
+    {id:'e98219e14',name:'王五',age:20}
+  ])
+</script>
+```
+
+:::
+
+
+
 ## 生命周期  
 > 创建阶段：`setup`  
 > 挂载阶段：`onBeforeMount`、`onMounted`  
@@ -921,6 +984,21 @@ function changemarPerson() {
 :::info customRef()实例  (数据变化2秒后视图再更新)
 <CustomRefTest></CustomRefTest>
 :::
+
+
+## KeepAlive组件  
+> **作用**：缓存包裹在其中的动态切换组件  
+> `props`:{ `include`?: MatchPattern, `exclude`?: MatchPattern, `max`?: number | string}  
+>> type MatchPattern = string | RegExp | (string | RegExp)[]  
+>> include 如果指定，则只有与 `include` 名称匹配的组件才会被缓存。  
+>> exclude 任何名称与 `exclude`匹配的组件都不会被缓存。  
+>> max  最多可以缓存多少组件实例
+```vue
+<keep-alive>  
+    <component :is="currentComponent" />  
+</keep-alive>  
+```
+
 
 
 ## Teleport组件  
