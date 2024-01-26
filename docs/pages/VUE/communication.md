@@ -55,20 +55,364 @@
 
 
 
-## props
+## props  
+- 概述：`props`是使用频率最高的一种通信方式，常用与 ：**父 ↔ 子**
+::: code-group 
+```vue [father.vue]
+<template>
+<child :car="car" ></child>
+</template>
+<script lang="ts" setup>
+    import child from './child.vue'
+    import {ref} from 'vue'
+    const car =ref('保时捷');//传给子组件的数据
+</script>
 
-## 自定义事件
+```
+
+```vue [child.vue]
+<template>
+<div>从父组件接收的数据：{{props.car}}</div>
+</template>
+<script lang="ts" setup>
+
+    // 第一种写法：仅接收
+// const props = defineProps(['car'])
+
+// 第二种写法：接收+限制类型
+// defineProps<{car:String}>()
+
+// 第三种写法：接收+限制类型+指定默认值+限制必要性
+let props = withDefaults(defineProps<{car?:String}>(),{
+  car:()=>'宝马'
+})
+</script>
+
+```
+:::
+
+## 自定义事件  
+- 概述：自定义事件常用于：**子 => 父。**   
+:::code-group 
+```vue [father.vue]
+<template>
+<child :car="car"  @changeCar="changeCar" ></child>
+</template>
+<script lang="ts" setup>
+    import child from './child.vue'
+    import {ref} from 'vue'
+    const car =ref('保时捷');//传给子组件的数据
+
+    function changeCar(){
+        car.value="特斯拉";
+    }
+</script>
+```
+
+```vue [child.vue]
+<template>
+<div>从父组件接收的数据：{{props.car}}</div>
+<button @click="changeCar">更换数据</button>
+</template>
+<script lang="ts" setup>
+
+    // 第一种写法：仅接收
+const props = defineProps(['car']);
+const emit =defineEmits(['changeCar']);
+
+function changeCar(){
+    emit('changeCar');//通知父组件更换数据
+}
+
+</script>
+```
+:::
+
 
 ## mitt  
+- [npm链接](https://www.npmjs.com/package/mitt)
+- 概述：与消息订阅与发布（`pubsub`）功能类似，可以实现任意组件间通信。  
+- 安装mitt    
+```shell 
+    npm install --save mitt
+```  
+:::code-group 
+
+```ts [emitter.ts] 
+// 引入mitt 
+import mitt from "mitt";
+// 创建emitter
+const emitter = mitt();
+// 暴露emitter
+export default emitter
+```
+
+```vue [app.vue]
+<template>
+<div>car:{{car}}</div>
+<button @click="emitCar" >点击传递数据</button>
+</template>
+<script lang="ts" setup>
+    import person from './person.vue'
+    import {ref} from 'vue'
+    import emitter from "./emitter.ts";
+
+    const car =ref('保时捷');//传递出去的数据
+
+    function emitCar(){
+        emitter.emit('send-car',car.value);//把数据car传递出去
+    }
+</script>
+
+```
+```vue [person.vue]
+<template>
+<div>app传递的数据：{{car}}</div>
+</template>
+<script lang="ts" setup>
+    import {onUnmounted} from 'vue' 
+    import emitter from "./emitter.ts";
+
+    const car ='';
+
+    // 接收app传递的数据
+    emitter.on('send-car',(value)=>{
+        car=value;
+    })
+
+    // 组件卸载解绑事件
+    onUnmounted(()=>{
+        emitter.off('send-car');
+    })
+
+</script>
+
+```
+:::
+
 
 ## v-model  
+- 概述：实现 **父↔子** 之间相互通信。  
+:::code-group 
+```vue [father.vue] 
+<template>
+    <Child v-model="inpValue"  v-model:show="showValue"></Child>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import Child from './child.vue';
+const inpValue = ref('123456');
+const showValue = ref(true);
+</script>
+
+```
+```vue [child.vue]
+<template>
+    <div>
+        <input type="text" class="inputs" 
+            :value="modelValue" 
+           @input="emit('update:model-value', ($event.target as HTMLInputElement ).value)"
+        />
+        <div>v-model:show:{{ show }}</div>
+        <button  @click="emit('update:show',!show)" >点击修改show</button>
+    </div>
+</template>
+
+<script setup lang="ts">
+defineProps(['modelValue','show']);
+// 声明事件
+const emit = defineEmits(['update:model-value','update:show'])
+
+</script>
+
+```
+
+:::
+
+:::info v-model实例
+<vModel></vModel>
+:::
+
 
 ## $attrs  
+- 概述：`$attrs`用于实现**当前组件的父组件**，向**当前组件的子组件**通信（**祖→孙**）。  
+::: code-group 
+```vue [father.vue]
+<template>
+<child :a="a" :b="b" :c="c"  v-bind={x:10,y:20}  :updateA="updateA"></child>
+</template>
+<script lang="ts" setup>
+import {ref} from 'vue'
+import child from './child.vue'
+
+const a=ref(0);
+const b=ref(1);
+const c=ref(2);
+
+function updateA(value){
+    a.value=value;
+}
+</script>
+
+```
+```vue [child.vue]
+
+<template>
+		<GrandChild v-bind="$attrs"/>
+</template>
+
+<script setup lang="ts" >
+	import GrandChild from './grandChild.vue'
+</script>
+```
+```vue [grandChild.vue]
+    <template>
+		<h3>孙组件</h3>
+		<h4>a：{{ a }}</h4>
+		<h4>b：{{ b }}</h4>
+		<h4>c：{{ c }}</h4>
+		<h4>x：{{ x }}</h4>
+		<h4>y：{{ y }}</h4>
+		<button @click="updateA(5)">点我更新A</button>
+</template>
+
+<script setup lang="ts" >
+	defineProps(['a','b','c','x','y','updateA'])
+</script>
+
+```
+
+::: 
 
 ## $refs、$parent  
+- `$refs`用于 ：**父→子。**  
+- `$parent`用于：**子→父。**     
+
+::: code-group 
+
+```vue [father.vue]
+<template>
+<div>子组件数据：{{childData}}</div>
+<button @click="getChildData($refs)">获取子组件数据</button>
+</template>
+<script lang="ts" setup>
+
+import {ref} from 'vue'
+
+const childData =ref('');
+const person =ref({name:"abc",age:14})
+
+function getChildData(refs:{[key:string]:any}){
+    console.log(refs[key]);
+    childData.value=refs[key].count;
+}
+
+defineExpose({ person });
+</script>
+```
+```vue [child.vue]
+<template>
+<div>父组件数据：{{fatherData}}</div>
+<button @click="getFatherData($parent)">获取父组件数据</button>
+</template>
+<script lang="ts" setup>
+    import {ref} from 'vue'
+    const count =ref(10);
+    const fatherData =ref({});
+    function getFatherData(parent:any){
+          fatherData.value=parent['person']  
+    }
+    defineExpose({ count });
+</script>
+```
+
+:::
 
 ## provide、inject  
+- 概述：实现**祖孙组件**直接通信  
+
+:::code-group 
+```vue [father.vue]
+<template>
+<div>银子：{{money}}</div>
+<div>车子：一辆{{car.brand}},价值{{car.price}}万</div>
+<child></child>
+</template>
+<script lang="ts" setup>
+import {ref,provide,reactive} from 'vue'
+ import child from './child.vue'
+
+const money =ref(10000);
+const car =reactive({brand:"保时捷",price:100});
+
+function updateMoney(value:number){
+    money.value-=value;
+}
+
+// 向后代传输数据
+provide('moneyContext',{money,updateMoney})
+provide('car',{car})
+
+</script>
+
+```
+
+
+```vue [child.vue]
+<template>
+<grandChild></grandChild>
+</template>
+<script lang="ts" setup>
+ import grandChild from './grandChild.vue'
+</script>
+```
+
+```vue [grandChild.vue]
+<template>
+<div>银子：{{money}}</div>
+<div>车子：一辆{{car.brand}},价值{{car.price}}万</div>
+<button @click="updateMoney(6)">花钱</button>
+</template>
+<script lang="ts" setup>
+import { inject } from "vue";
+
+// 接收祖辈传递的数据
+let {money,updateMoney} =inject('moneyContext',{money:0,updateMoney:(param:number)=>{}})
+let {car} =inject('car',{brand:"未知",price:0})
+
+</script>
+
+```
+
+:::
 
 ## pinia  
 
-## slot
+## slot  
+- 默认插槽
+> - 概述：父→子  
+
+:::code-group 
+```vue [father.vue]
+<template>
+<child>
+
+</child>
+</template>
+<script lang="ts" setup>
+import child from './child.vue'
+
+</script>
+```
+
+```vue [child.vue]
+
+```
+:::
+
+<script setup>
+    import '/index.css';
+    import vModel from './components/vModel.vue'
+
+</script>
