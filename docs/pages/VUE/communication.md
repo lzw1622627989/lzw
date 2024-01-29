@@ -396,23 +396,152 @@ let {car} =inject('car',{brand:"未知",price:0})
 :::code-group 
 ```vue [father.vue]
 <template>
-<child>
-
+<child title="热门游戏">
+     <ul>
+         <li v-for="item in games" :key="item.id">{{ item.name }}</li>
+      </ul>
+</child>
+<child title="热门影剧">
+     <ul>
+         <li v-for="item in videos" :key="item.id">{{ item.name }}</li>
+      </ul>
+</child>
+<child title="今日图片">
+     <img  src="/avatar.jpg" alt="">
 </child>
 </template>
 <script lang="ts" setup>
 import child from './child.vue'
+import { reactive } from 'vue'
 
+const games = reactive([{ id: 1, name: "原神" }, { id: 2, name: "王者" }, { id: 3, name: "崩铁" }]);
+const videos = reactive([{ id: 10, name: "大话西游" }, { id: 11, name: "百变星君" }, {id:12,name:"大圣娶亲"}])
 </script>
 ```
 
 ```vue [child.vue]
-
+    <template>
+        <div class="title">{{ title }}</div>
+        <slot></slot>
+    </template>
+    <script lang="ts" setup>
+        defineProps(['title'])
+    </script>
 ```
+:::   
+
+- 具名插槽 
+> -  概述：父→子  
+:::code-group 
+```vue [father.vue]
+<template>
+<child >
+      <template #content>
+            <ul>
+               <li v-for="item in games" :key="item.id">{{ item.name }}</li>
+            </ul>
+      </template>
+        <template #title>
+               <div class="title">热门游戏</div>
+        </template>
+</child>
+<child >
+      <template #content>
+            <ul>
+               <li v-for="item in videos" :key="item.id">{{ item.name }}</li>
+            </ul>
+      </template>
+        <template #title>
+               <div class="title">热门影剧</div>
+        </template>
+</child>
+<child >
+      <template #content>
+           <img  src="/avatar.jpg" alt="">
+      </template>
+        <template #title>
+               <div class="title">今日图片</div>
+        </template>
+</child>
+
+</template>
+<script lang="ts" setup>
+import child from './child.vue'
+import { reactive } from 'vue'
+
+const games = reactive([{ id: 1, name: "原神" }, { id: 2, name: "王者" }, { id: 3, name: "崩铁" }]);
+const videos = reactive([{ id: 10, name: "大话西游" }, { id: 11, name: "百变星君" }, {id:12,name:"大圣娶亲"}])
+</script>
+```
+
+```vue [child.vue]
+    <template>
+       <slot name="title"></slot>
+        <slot name="content"></slot>
+    </template>
+```
+:::   
+
+- 作用域插槽  
+> - 概述：子→父  
+:::code-group 
+```vue [father.vue]
+<template>
+<child >
+ <template v-slot="param">
+         <ul>
+            <li v-for="item in param.game" :key="item.id">{{ item.name }}</li>
+         </ul>
+      </template>
+</child>      
+<child >
+ <template v-slot="param">
+         <ol>
+            <li v-for="item in param.game" :key="item.id">{{ item.name }}</li>
+         </ol>
+      </template>
+</child>      
+<child >
+ <template #default="{game}">
+         <ul>
+            <li v-for="item in game" :key="item.id">{{ item.name }}</li>
+         </ul>
+      </template>
+</child>      
+</template>
+<script lang="ts" setup>
+import child from './child.vue'
+</script>
+```
+
+```vue [child.vue]
+    <template>
+       <div class="title">热门游戏</div>
+        <slot :game="games" ></slot>
+    </template>
+    <script lang="ts" setup>
+        import { reactive } from 'vue'
+        const games = reactive([{ id: 1, name: "原神" }, { id: 2, name: "王者" }, { id: 3, name: "崩铁" }]);
+    </script>
+```
+:::
+
+- 实例  
+::: info slot默认插槽 
+<SoltTest type="default"></SoltTest>
+:::  
+
+::: info slot具名插槽  
+<SoltTest type="sign"></SoltTest>
+:::  
+
+::: info slot作用域插槽 
+<SoltTest type="action"></SoltTest>
 :::
 
 <script setup>
     import '/index.css';
     import vModel from './components/vModel.vue'
+    import SoltTest from './components/slot.vue'
 
 </script>
