@@ -53,8 +53,6 @@
     </tr>
 </table>
 
-
-
 ## props  
 - 概述：`props`是使用频率最高的一种通信方式，常用与 ：**父 ↔ 子**
 ::: code-group 
@@ -388,6 +386,7 @@ let {car} =inject('car',{brand:"未知",price:0})
 :::
 
 ## pinia  
+详情[pinia](/VUE/pinia.md)
 
 ## slot  
 - 默认插槽

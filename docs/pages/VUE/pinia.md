@@ -5,7 +5,8 @@
 yarn add pinia
 # 或者使用 npm
 npm install pinia
-```  
+```
+  
 ## 环境配置  
 - `Store`是一个保存：**状态**、**业务逻辑** 的实体，每个组件都可以**读取**、**写入**它。  
 - 它有三个概念：`state`、`getter`、`action`，相当于组件中的： `data`、 `computed` 和 `methods`。  
