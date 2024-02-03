@@ -1,19 +1,6 @@
 import { DefaultTheme } from "vitepress";
 export const sidebarList: DefaultTheme.Sidebar = {
   "/VUE/": [
-    // {
-    //   text: "Examples",
-
-    //   items: [
-    //     { text: "Markdown Examples", link: "/markdown-examples" },
-    //     { text: "test", link: "/test" },
-    //   ],
-    // },
-    // {
-    //   text: "API",
-    //   items: [{ text: "Runtime API Examples", link: "/api-examples" }],
-    // },
-
     {
       text: "VUE",
       items: [
@@ -63,7 +50,11 @@ export const sidebarList: DefaultTheme.Sidebar = {
   "/UI": [
     {
       text: "UI",
-      items: [{ text: "ui", link: "/UI/" }],
+      items: [
+        { text: "移动端UI库", link: "/UI/" },
+        { text: "PC端UI库", link: "/UI/pc.md" },
+        { text: "自适应布局", link: "/UI/layout.md" },
+      ],
     },
   ],
   "/NPM": [
