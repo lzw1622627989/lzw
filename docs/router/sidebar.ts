@@ -53,6 +53,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "移动端UI库", link: "/UI/" },
         { text: "PC端UI库", link: "/UI/pc.md" },
+        { text: "跨端UI库", link: "/UI/all.md" },
         { text: "自适应布局", link: "/UI/layout.md" },
       ],
     },

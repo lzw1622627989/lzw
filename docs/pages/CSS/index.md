@@ -143,5 +143,40 @@
    right:0;  
    margin:auto; 
   }
+```  
+
+## CSS复位  
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+```  
+
+## unset  
+> 用all简写來指定所有元素的属性。 将该值设置为unset会将元素的属性更改为其初始值  
+```css
+button {
+  all: unset;
+}
+```  
+
+## 负的nth-child  
+```css
+li {
+  display: none;
+}
+/* 选择第 1 至第 3 个元素并显示出来 */
+li:nth-child(-n+3) {
+  display: block;
+}
+
+/* 选择除前3个之外的所有项目，并显示它们 */
+li:not(:nth-child(-n+3)) {
+  display: none;
+}
 ```
 
