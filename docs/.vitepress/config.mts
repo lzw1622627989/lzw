@@ -5,7 +5,7 @@ import { sidebarList } from "../router/sidebar";
 
 export default defineConfig({
   base: "/lzw/",
-  title: "程序猿爱瞎逛",
+  title: "无心懒烊烊",
   description: ".....",
   markdown: {
     lineNumbers: true,
@@ -21,7 +21,7 @@ export default defineConfig({
     footer: {
       message: `2024-01-02至${new Date().getFullYear()}-${
         new Date().getMonth() + 1 < 10
-          ? "" + new Date().getMonth() + 1
+          ? '0' +( new Date().getMonth() + 1)
           : new Date().getMonth() + 1
       }-${
         new Date().getDate() < 10
