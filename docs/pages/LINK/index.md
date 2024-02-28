@@ -21,7 +21,7 @@
 |Taro|开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv 等框架来开发微信/京东/百度/支付宝/字节跳动/ QQ 小程序/H5/React Native 等应用。|https://taro-docs.jd.com/docs/|
 |Kbone|一个致力于微信小程序和 Web 端同构的解决方案|https://wechat-miniprogram.github.io/kbone/docs/|  
 
-## 后台管理模版  
+## Vue后台管理模版  
 |名称|描述|源码下载|
 |:---:|:---|:---|
 |[RuoYi-Vue3](https://github.com/yangzongzhuan/RuoYi-Vue3)| Vue3 + Element Plus + Vite|git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git| 
