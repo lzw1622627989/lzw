@@ -180,3 +180,14 @@ li:not(:nth-child(-n+3)) {
 }
 ```
 
+
+## 模拟`disabled`效果
+```css
+[selector]{
+    cursor: not-allowed;
+    opacity: .5;
+    pointer-events: none;
+}
+
+```
+
