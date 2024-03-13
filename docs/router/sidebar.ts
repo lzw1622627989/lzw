@@ -84,4 +84,13 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [{ text: "git", link: "/GIT/" }],
     },
   ],
+  "/LeetCode": [
+    {
+      text: "LeetCode",
+      items: [
+        { text: "LeetCode入门", link: "/LeetCode/" },
+        { text: "数组算法", link: "/LeetCode/array" },
+      ],
+    },
+  ],
 };

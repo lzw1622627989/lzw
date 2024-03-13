@@ -17,6 +17,7 @@ export const navList: DefaultTheme.NavItem[] = [
       { text: "npm", link: "/NPM/" },
       { text: "link", link: "/LINK/" },
       { text: "git", link: "/GIT/" },
+      { text: "leet-code", link: "/LeetCode/" },
     ],
   },
 ];

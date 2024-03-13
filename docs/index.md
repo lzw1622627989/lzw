@@ -47,7 +47,10 @@ features:
     link: /LINK/
   - title: GIT
     icon: 🐔
-    link: /GIT/
+    link: /GIT/ 
+  - title: LEETCODE   
+    icon: 🐶
+    link: /LeetCode/
 
     
 --- 
