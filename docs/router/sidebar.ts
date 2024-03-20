@@ -90,6 +90,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "LeetCode入门", link: "/LeetCode/" },
         { text: "数组算法", link: "/LeetCode/array" },
+        { text: "2024-03", link: "/LeetCode/2024-03" },
       ],
     },
   ],
