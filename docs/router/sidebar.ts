@@ -69,7 +69,11 @@ export const sidebarList: DefaultTheme.Sidebar = {
   "/REACT": [
     {
       text: "REACT",
-      items: [{ text: "react", link: "/REACT/" }],
+      items: [
+        { text: "react", link: "/REACT/" },
+        { text: "react-hooks", link: "/REACT/hooks.md" },
+
+      ],
     },
   ],
   "/TS": [
