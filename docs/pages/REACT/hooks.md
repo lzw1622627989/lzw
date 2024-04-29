@@ -303,3 +303,66 @@ export default function App(){
 }
 ```
 :::
+
+## useCallback
+### 在多次渲染中缓存函数
+::: details 1
+
+:::
+
+## useId
+### 生成一个唯一的`ID`
+::: details 用法
+
+```jsx
+import {useId} from 'react'
+export default function App(){
+    const id =useId();
+    return (
+        <>
+            <div id={id}>id</div>
+        </>
+    )
+}
+```
+:::
+
+## useImperativeHandle
+### 向父组件暴露一个自定义的`ref`
+::: details 用法
+::: code-group
+```jsx [Childen.jsx]
+import { forwardRef,useImperativeHandle,useState } from 'react'
+export default forwardRef(function Childen(props,ref){
+    const [count,setCount] =useState(0);
+    useImperativeHandle(ref,()=>({
+        count,
+        increment:()=>setCount(count+1)
+    }))
+    return(
+        <div>Childen content</div>
+    )
+})
+
+```
+```jsx [App.jsx]
+import {useRef} from 'react'
+import Childen from './Chileden'
+export default function App(){
+    const childenRef =useRef(null);
+    function increment(){
+        childenRef.current.increment();
+        console.log( childenRef.current.count)
+    }
+    return(
+        <>
+        <Childen ref={childenRef} ></Childen>
+        <button onClick={increment}>increment count</button>
+        </>
+    )
+}
+
+```
+
+
+:::
