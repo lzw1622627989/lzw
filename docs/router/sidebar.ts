@@ -72,6 +72,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "react", link: "/REACT/" },
         { text: "react-hooks", link: "/REACT/hooks.md" },
+        { text: "react-router", link: "/REACT/router.md" },
 
       ],
     },
