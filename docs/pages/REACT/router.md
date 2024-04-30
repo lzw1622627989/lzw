@@ -8,6 +8,7 @@ npm install react-router-dom
 #pnpm
 pnpm install react-router-dom
 ```
+
 ## 使用
 ```jsx 
 // main.jsx
@@ -178,7 +179,7 @@ export default function About(){
 :::
 
 ## 路由传参
-::: details params传参
+::: details params传参 `useParams`
 ::: code-group
 ```js [router.js] 
 import { lazy } from "react";
@@ -248,9 +249,142 @@ export default function About(){
 ```
 
 :::
-::: details search传参
+::: details search传参 `useSearchParams`
+::: code-group
+```js [router.js] 
+import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 
+const Home =lazy(()=>import("@/views/Home"))
+const About =lazy(()=>import("@/views/About"))
+
+export default const routers=[
+    {
+        path:"/home",
+        element:<Home/>,
+        children:[
+            {
+                path:"about",
+                element:<About/>
+            }
+        ]
+    },{
+        path:"/",
+        element:<Navigate to="/home"/>
+    }
+]
+```
+```jsx [App.jsx]
+import {Suspense} from 'react'
+import {useRoutes } from 'react-router-dom'
+import routers from "./router.js"
+export default function App(){
+    const routerView =useRoutes(routers);
+    return (
+        <>
+        <div>
+            {
+               <Suspense fallback={<div>loading...</div>}>{routerView}</Suspense> 
+            }
+        </div>
+        </>
+    )
+}
+
+```
+```jsx [Home.jsx]
+import {Link,Outlet} from 'react-router-dom'
+export default function Home(){
+    return(
+        <>
+            <div>Home Pages</div>
+            <Link to="about?id=123" >跳转About</Link>
+            {/* 子路由出口 */}
+            <Outlet />
+        </>
+    )
+}
+```
+```jsx [About.jsx]
+import {Link,useSearchParams} from 'react-router-dom'
+export default function About(){
+     const [search, setSearch] = useSearchParams();
+    return (
+        <>
+            <div>About Pages id:{search.get('id')}</div>
+            <Link to="/" > 返回Home</Link>
+        </>
+    )
+}
+```
 :::
-::: details state传参
+::: details state传参 `useLocation`
+::: code-group
+```js [router.js] 
+import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 
+const Home =lazy(()=>import("@/views/Home"))
+const About =lazy(()=>import("@/views/About"))
+
+export default const routers=[
+    {
+        path:"/home",
+        element:<Home/>,
+        children:[
+            {
+                path:"about",
+                element:<About/>
+            }
+        ]
+    },{
+        path:"/",
+        element:<Navigate to="/home"/>
+    }
+]
+
+```
+
+```jsx [App.jsx]
+import {Suspense} from 'react'
+import {useRoutes } from 'react-router-dom'
+import routers from "./router.js"
+export default function App(){
+    const routerView =useRoutes(routers);
+    return (
+        <>
+        <div>
+            {
+               <Suspense fallback={<div>loading...</div>}>{routerView}</Suspense> 
+            }
+        </div>
+        </>
+    )
+}
+
+```
+```jsx [Home.jsx]
+import {Link,Outlet} from 'react-router-dom'
+export default function Home(){
+    return(
+        <>
+            <div>Home Pages</div>
+            <Link to="about" state={{id:123}} >跳转About</Link>
+            {/* 子路由出口 */}
+            <Outlet />
+        </>
+    )
+}
+```
+```jsx [About.jsx]
+import {Link,useLocation} from 'react-router-dom'
+export default function About(){
+     const {state:{id}} = useLocation();
+    return (
+        <>
+            <div>About Pages id:{id}</div>
+            <Link to="/" > 返回Home</Link>
+        </>
+    )
+}
 :::
