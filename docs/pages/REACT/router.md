@@ -391,3 +391,32 @@ export default function About(){
 :::
 
 ## 编程式路由
+::: details 使用
+```jsx
+import { useNavigate} from 'react-router-dom'
+
+export default function App(){
+
+    function onParams(){
+        // 等价于 <Link to="about/123" >跳转About</Link>
+        useNavigate("/about/123")
+    }
+
+    function onSearch(){
+        // 等价于 <Link to="about?id=123" >跳转About</Link>
+        useNavigate("/about?id=123",{replace:true})//true:replace模式 false:push模式
+    }
+    function onState(){
+        // 等价于<Link to="about" state={{id:123}} >跳转About</Link>
+        useNavigate("/about",{state:{id:123}})
+    }
+    return (
+        <>
+        <buttoon onClick={onParams}>params传参</buttoon>
+        <buttoon onClick={onSearch}>search传参</buttoon>
+        <buttoon onClick={onState}>state传参</buttoon>
+        </>
+    )
+}
+```
+:::
