@@ -419,9 +419,9 @@ export default function App(){
     }
     return (
         <>
-        <buttoon onClick={onParams}>params传参</buttoon>
-        <buttoon onClick={onSearch}>search传参</buttoon>
-        <buttoon onClick={onState}>state传参</buttoon>
+        <button onClick={onParams}>params传参</button>
+        <button onClick={onSearch}>search传参</button>
+        <button onClick={onState}>state传参</button>
         <button onClick={back}>后退</button>
         <button onClick={forward}>前进</button>
         </>
