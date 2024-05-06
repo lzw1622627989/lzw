@@ -1,4 +1,4 @@
-# React Router
+# [React Router](https://baimingxuan.github.io/react-router6-doc/)
 
 ## 安装
 ```bash
@@ -426,6 +426,29 @@ export default function App(){
         <button onClick={forward}>前进</button>
         </>
     )
+}
+```
+:::
+
+## useInRouterContext
+### 判断组件是在 `<Router>` 的上下文中呈现
+:::details 用法
+```jsx
+import { useInRouterContext } from 'react-router-dom'
+export default function App(){
+     console.log(useInRouterContext());//true在  false不在
+}
+```
+:::
+
+## useNavigationType
+### 返回当前的导航类型或用户是如何进入当前页面的
+::: details 用法
+
+```jsx
+import { useNavigationType } from 'react-router-dom'
+export default function App(){
+     console.log(useNavigationType());//"POP" | "PUSH" | "REPLACE"
 }
 ```
 :::
