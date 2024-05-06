@@ -410,11 +410,20 @@ export default function App(){
         // 等价于<Link to="about" state={{id:123}} >跳转About</Link>
         useNavigate("/about",{state:{id:123}})
     }
+
+    function back(){
+        useNavigate(-1)
+    }
+    function forward(){
+         useNavigate(1)
+    }
     return (
         <>
         <buttoon onClick={onParams}>params传参</buttoon>
         <buttoon onClick={onSearch}>search传参</buttoon>
         <buttoon onClick={onState}>state传参</buttoon>
+        <button onClick={back}>后退</button>
+        <button onClick={forward}>前进</button>
         </>
     )
 }
