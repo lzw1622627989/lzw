@@ -29,3 +29,27 @@
 |[vue-element-plus-admin](https://gitee.com/kailong110120130/vue-element-plus-admin)|Vue3 + Element Plus + Vite|git clone https://gitee.com/kailong110120130/vue-element-plus-admin.git|
 |[vue-element-plus-admin-mini](https://gitee.com/kailong110120130/vue-element-plus-admin/tree/mini/)|Vue3 + Element Plus + Vite|git clone -b mini https://gitee.com/kailong110120130/vue-element-plus-admin.git| 
 |[yudao-ui-admin-vben](https://gitee.com/yudaocode/yudao-ui-admin-vben)|基于 Vue3 + vben(ant-design-vue) 实现的管理后台|git clone https://gitee.com/yudaocode/yudao-ui-admin-vben.git|
+
+
+## 视频播放器
+
+|名称|地址|
+|:---:|:---:|
+|西瓜视频播放器|https://h5player.bytedance.com/|
+|Player|https://plyr.io/|
+
+
+## dom元素转图片
+|名称|地址|
+|:---:|:---:|
+|dom-to-image|https://www.npmjs.com/package/dom-to-image|
+|html2canvas|https://html2canvas.cn/|
+
+## 移动端手势库
+
+|名称|地址|
+|:---:|:---:|
+|BetterScroll 2.0 (推荐使用)|https://better-scroll.github.io/docs/zh-CN/|
+|hammer.js|https://github.com/hammerjs/hammer.js?tab=readme-ov-file|
+|Multi-touch|https://interactjs.io/|
+|@use-gesture/react(rect库)|https://www.npmjs.com/package/@use-gesture/react|
