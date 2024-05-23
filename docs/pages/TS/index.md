@@ -343,6 +343,7 @@ console.log(p2);
 ```
 
 - 继承
+
 ```ts
 // Person类
 class Person {}
@@ -358,4 +359,243 @@ const s2 = new Student("李同学", 20);
 // Teacher实例
 const t1 = new Teacher("刘⽼师", 40);
 const t2 = new Teacher("孙⽼师", 50);
+```
+
+- 抽象类：不能去实例化，但可以被别⼈继承，抽象类⾥有抽象⽅法
+
+```ts
+// Person（抽象类）
+abstract class Person {}
+// Teacher类继承Person
+class Teacher extends Person {
+  // 构造器
+  constructor(name: string, age: number) {
+    super(name, age);
+  }
+  // ⽅法
+  speak() {
+    console.log("你好！我是⽼师:", this.name);
+  }
+}
+// Student类继承Person
+class Student extends Person {}
+// Person实例
+// const p1 = new Person('周杰伦',38) // 由于Person是抽象类，所以此处不可以new Person的实例对象
+```
+
+## 接口
+
+1. ⽤于限制⼀个类中包含哪些属性和⽅法
+
+```ts
+// Person接⼝
+interface Person {
+  // 属性声明
+  name: string;
+  age: number;
+  // ⽅法声明
+  speak(): void;
+}
+// Teacher实现Person接⼝
+class Teacher implements Person {
+  name: string;
+  age: number;
+  // 构造器
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+  // ⽅法
+  speak() {
+    console.log("你好！我是⽼师:", this.name);
+  }
+}
+```
+
+2. 可以重复声明
+
+```ts
+// Person接⼝
+interface PersonInter {
+  // 属性声明
+  name: string;
+  age: number;
+}
+// Person接⼝
+interface PersonInter {
+  // ⽅法声明
+  speak(): void;
+}
+// Person类继承PersonInter
+class Person implements PersonInter {
+  name: string;
+  age: number;
+  // 构造器
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+  // ⽅法
+  speak() {
+    console.log("你好！我是⽼师:", this.name);
+  }
+}
+```
+
+3. 【接⼝】与【⾃定义类型】的区别
+
+- 接口可以当自定义类型去使用、可以限制类的结构
+- 自定义类型仅仅是自定义类型，不能重复声明
+
+```ts
+// Person接⼝
+interface Person {
+  // 应该具有的属性
+  name: string;
+  age: number;
+  // 应该具有的⽅法
+  speak(): void;
+}
+// Person类型
+/*
+type Person = {
+// 应该具有的属性
+name: string
+age: number
+// 应该具有的⽅法
+speak():void
+}
+*/
+// 接⼝当成⾃定义类型去使⽤
+let person: Person = {
+  name: "张三",
+  age: 18,
+  speak() {
+    console.log("你好！");
+  },
+};
+```
+
+4. 【接⼝】与【抽象类】的区别
+
+- 抽象类
+  1. 可以有普通方法，也可以有抽象方法
+  2. 使用`extends`关键字去继承抽象类
+- 接口
+  1. 只能有抽象方法
+  2. 使用`implements`关键字去实现接口
+
+```ts
+//抽象类示例
+// 抽象类 —— Person
+abstract class Person {
+  // 属性
+  name: string;
+  age: number;
+  // 构造器
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+  // 抽象⽅法
+  abstract speak(): void;
+  // 普通⽅法
+  walk() {
+    console.log("我在⾏⾛中....");
+  }
+}
+// Teacher类继承抽象类Person
+class Teacher extends Person {
+  constructor(name: string, age: number) {
+    super(name, age);
+  }
+  speak() {
+    console.log(`我是⽼师，我的名字是${this.name}`);
+  }
+}
+```
+
+```ts
+//接口示例
+// 接⼝ —— Person，只能包含抽象⽅法
+interface Person {
+  // 属性，不写具体值
+  name: string;
+  age: number;
+  // ⽅法，不写具体实现
+  speak(): void;
+}
+// 创建Teacher类实现Person接⼝
+class Teacher implements Person {
+  name: string;
+  age: number;
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+  speak() {
+    console.log("我在⻜快的⾏⾛中......");
+  }
+}
+```
+
+## 属性修饰符
+
+|           |          |                            |
+| :-------: | :------: | :------------------------: |
+| readonly  | 只读属性 |        属性无法修改        |
+|  public   |  公开的  | 可以在类、子类和对象中修改 |
+| protected | 受保护的 |    可以在类、子类中修改    |
+|  private  |  私有的  |       可以在类中修改       |
+
+## 泛型
+
+- 定义⼀个函数或类时，有些情况下⽆法确定其中要使⽤的具体类型（返回值、参数、属性的类型不能确定），此时就需要泛型了
+  > > 举例： `<T> `就是泛型，（不⼀定⾮叫 T ），设置泛型后即可在函数中使⽤ T 来表示该类型：
+
+```ts
+function test<T>(arg: T): T {
+  return arg;
+}
+// 不指名类型，TS会⾃动推断出来
+test(10);
+// 指名具体的类型
+test<number>(10);
+```
+
+- 泛型可以写多个
+
+```ts
+function test<T, K>(a: T, b: K): K {
+  return b;
+}
+// 为多个泛型指定具体⾃值
+test<number, string>(10, "hello");
+```
+
+- 类中同样可以使⽤泛型
+
+```ts
+class MyClass<T> {
+  prop: T;
+  constructor(prop: T) {
+    this.prop = prop;
+  }
+}
+```
+
+- 对泛型的范围进⾏约束
+
+```ts
+interface Demo {
+  length: number;
+}
+// 泛型T必须是MyInter的⼦类，即：必须拥有length属性
+function test<T extends Demo>(arg: T): number {
+  return arg.length;
+}
+test(10); // 类型“number”的参数不能赋给类型“Demo”的参数
+test({ name: "张三" }); // 类型“{ name: string; }”的参数不能赋给类型“Demo”的参数
+test("123");
+test({ name: "张三", length: 10 });
 ```
