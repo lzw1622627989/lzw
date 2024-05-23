@@ -89,6 +89,12 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [{ text: "git", link: "/GIT/" }],
     },
   ],
+  "/Python": [
+    {
+      text: "Python",
+      items: [{ text: "python", link: "/Python/" }],
+    },
+  ],
   "/LeetCode": [
     {
       text: "LeetCode",

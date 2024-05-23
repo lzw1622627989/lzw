@@ -51,6 +51,9 @@ features:
   - title: LEETCODE   
     icon: 🐶
     link: /LeetCode/
+  - title: PYTHON   
+    icon: 🐷
+    link: /Python/
 
     
 --- 
