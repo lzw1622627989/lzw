@@ -27,6 +27,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
         { text: "css小技巧", link: "/CSS/" },
         { text: "flex布局", link: "/CSS/flex.md" },
         { text: "grid布局", link: "/CSS/grid.md" },
+        { text: "媒体查询", link: "/CSS/media.md" },
         { text: "图像滤镜", link: "/CSS/filter.md" },
       ],
     },

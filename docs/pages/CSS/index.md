@@ -191,3 +191,16 @@ li:not(:nth-child(-n+3)) {
 
 ```
 
+## 媒体查询判断设备横/竖屏
+```css
+/* 竖屏样式 */
+@media (orientation: portrait) {
+ 
+}
+
+/* 横屏样式 */
+@media (orientation: landscape) {
+
+}
+```
+
