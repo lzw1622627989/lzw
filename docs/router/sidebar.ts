@@ -43,6 +43,13 @@ export const sidebarList: DefaultTheme.Sidebar = {
         { text: "js简写技巧", link: "/JS/simplify.md" },
       ],
     },
+    {
+      text: "Radash",
+      items: [
+        { text: "安装", link: "/JS/Radash/" },
+        { text: "Array数组", link: "/JS/Radash/array.md" },
+      ],
+    },
   ],
   "/LINK": [
     {
@@ -74,7 +81,6 @@ export const sidebarList: DefaultTheme.Sidebar = {
         { text: "react", link: "/REACT/" },
         { text: "react-hooks", link: "/REACT/hooks.md" },
         { text: "react-router", link: "/REACT/router.md" },
-
       ],
     },
   ],

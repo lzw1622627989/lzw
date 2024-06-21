@@ -21,7 +21,7 @@ export default defineConfig({
     footer: {
       message: `2024-01-02至${new Date().getFullYear()}-${
         new Date().getMonth() + 1 < 10
-          ? '0' +( new Date().getMonth() + 1)
+          ? "0" + (new Date().getMonth() + 1)
           : new Date().getMonth() + 1
       }-${
         new Date().getDate() < 10
@@ -36,6 +36,10 @@ export default defineConfig({
     outline: {
       label: "锚点导航",
     },
+    docFooter: {
+      next: "下一页",
+      prev:"上一页"
+    }
   },
   rewrites: {
     // 'packages/:pkg/src/(.*)': ':pkg/index.md'
