@@ -377,4 +377,67 @@ sum([1, 2, 3, 4, 5]);//=>15
 在数组中切换项目的存在
 ### 基本用法
 如果列表中已经存在与条件匹配的项目，则将其移除。如果不存在，则将其添加。
+```js
+import { toggle } from 'radash';
+const arr =[1,2,3,4,5];
+toggle(arr,3);//=>[1,2,4,5]
+toggle(arr,6);//=>[1,2,3,4,5,6]
+```
+#### toggle(list, item, identity)
+您可以传递一个可选的 `toKey` 函数来确定非原始值的标识。在处理更复杂的数据类型时非常有用
+```js
+import { toggle } from 'radash';
+ const ra = { name: "Ra" };
+ const zeus = { name: "Zeus" };
+ const loki = { name: "Loki" };
+ const vishnu = { name: "Vishnu" };
+ const gods = [ra, zeus, loki];
+ toggle(gods, vishnu, god => god.name);//=>[ra, zeus, loki, vishnu]
+ toggle(gods, ra, god => god.name);//=>[ zeus, loki]
+```
 
+#### toggle(list, item, identity, options)
+默认情况下，如果项目不存在，切换将追加该项目。如果您需要替代选项参数中的 strategy ，则可以将项目前置。
+```js
+import { toggle } from 'radash';
+const gods = ["ra", "zeus", "loki"];
+toggle(gods, "vishnu", (g) => g, { strategy: "prepend" }); // => ['vishnu', 'ra', 'zeus', 'loki']
+```
+## unique （唯一）
+从数组中删除重复项
+### 基本用法
+给定一个项目数组 -- 可选的，一个确定它们身份的函数 -- 返回一个没有重复项的新数组。
+
+该函数不保留项目的原始顺序。
+```js
+import { unique } from 'radash';
+const arr = [1, 2, 3, 4, 5,6,9 1, 2, 3, 4, 5];
+unique(arr);//=>[1,2,3,4,5,6,9]
+
+const persons = [{ name: 'John', age: 20 }, { name: 'Jane', age: 35 }, { name: 'John', age: 20 }];
+unique(persons, p => p.name);//=>[{ name: 'John', age: 20 }, { name: 'Jane', age: 35 }]
+```
+
+## zipToObject
+将多个数组合并成集合
+### 基本用法
+创建一个对象，将第一个数组中的键映射到第二个数组中相应的值。
+```js
+import { zipToObject } from 'radash';
+const keys = ['a', 'b', 'c'];
+const values = [1, 2, 3];
+zipToObject(keys, values);//=>{a: 1, b: 2, c: 3}
+ziptopToObject(keys,k=>k+1);//=>{a: a1, b: b1, c: c1}
+zipToObject(keys,"");//=>{a: "", b: "", c: ""}
+```
+
+## zip
+将多个数组合并成集合
+### 基本用法
+创建一个分组元素的数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
+```js
+import { zip } from 'radash';
+const arr1 =[1,2,3];
+const arr2 =[4,5,6];
+zip(arr1,arr2);//=>[[1,4],[2,5],[3,6]]
+```

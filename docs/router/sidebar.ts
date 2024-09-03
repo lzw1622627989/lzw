@@ -29,6 +29,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
         { text: "grid布局", link: "/CSS/grid.md" },
         { text: "媒体查询", link: "/CSS/media.md" },
         { text: "图像滤镜", link: "/CSS/filter.md" },
+        { text: "TailwindCSS", link: "/CSS/TailwindCSS.md" },
       ],
     },
   ],
@@ -48,6 +49,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
       items: [
         { text: "安装", link: "/JS/Radash/" },
         { text: "Array数组", link: "/JS/Radash/array.md" },
+        { text: "Object对象", link: "/JS/Radash/object.md" },
       ],
     },
   ],
