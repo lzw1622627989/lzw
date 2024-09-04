@@ -54,5 +54,36 @@ https://weapp-tw.icebreaker.top/
 ```
 
 
+## vite 配置
+`vite内置postcss 可以省略第2步`
+- 单位转换
+```bash
+npm install postcss-px-to-viewport --save-dev
+```
+```js
+// vite.config.js
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+import PxToViewport from 'postcss-px-to-viewport';
+
+export default defineConfig({
+  plugins: [vue()],
+  css: {
+    postcss: {
+      plugins: [
+        tailwindcss(),
+        autoprefixer(),
+        PxToViewport({
+          viewportWidth: 375,
+        })
+      ]
+    }
+  }
+})
+
+
+```
+
+
 
 
