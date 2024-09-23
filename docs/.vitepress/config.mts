@@ -19,6 +19,8 @@ export default defineConfig({
     nav: navList,
     sidebar: sidebarList,
     footer: {
+
+      
       message: `2024-01-02至${new Date().getFullYear()}-${
         new Date().getMonth() + 1 < 10
           ? "0" + (new Date().getMonth() + 1)
@@ -49,4 +51,10 @@ export default defineConfig({
   },
   head: [["link", { rel: "icon", href: "/lzw/lzw.ico" }]],
   lastUpdated: true,
+  vite: {
+    server: {
+      host: '0.0.0.0',
+      port:"5050"
+    }
+  }
 });

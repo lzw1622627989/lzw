@@ -1,3 +1,16 @@
+## vue常用库
+|名称|链接|描述|
+|:---:|:---:|:---:|
+|Vue|https://cn.vuejs.org/|官网|
+|VueRouter|https://router.vuejs.org/zh/|Vue路由|
+|Pinia| https://pinia.vuejs.org/zh/|Vue状态管理库|
+|VueUse|https://vueuse.nodejs.cn/guide/|VueUse 是基于 组合式 API 的实用函数集合|
+|Axios|https://www.axios-http.cn/|网络请求库|
+|Vite|https://cn.vitejs.dev/|下一代的前端工具链|
+|Vue I18n|https://kazupon.github.io/vue-i18n/zh/|Vue I18n 是 Vue.js 的国际化插件|
+|vue3-resource|https://hu-snail.github.io/vue3-resource/platform/introduction.html|Vue3收集大全|
+|vue-office|https://501351981.github.io/vue-office/examples/docs/guide/|支持多种文件(docx、.xlsx、pdf)预览的vue组件库|
+
 ## ChatGPT  
 |名称|描述|地址|  
 |:---:|:---:|:---:|
@@ -32,7 +45,6 @@
 
 
 ## 视频播放器
-
 |名称|地址|
 |:---:|:---:|
 |西瓜视频播放器|https://h5player.bytedance.com/|
@@ -46,10 +58,23 @@
 |html2canvas|https://html2canvas.cn/|
 
 ## 移动端手势库
-
 |名称|地址|
 |:---:|:---:|
 |BetterScroll 2.0 (推荐使用)|https://better-scroll.github.io/docs/zh-CN/|
 |hammer.js|https://github.com/hammerjs/hammer.js?tab=readme-ov-file|
 |Multi-touch|https://interactjs.io/|
 |@use-gesture/react(rect库)|https://www.npmjs.com/package/@use-gesture/react|
+
+
+## 富文本编辑器
+|名称|地址|
+|:---:|:---:|
+|wangEditor 5|https://www.wangeditor.com/v5/getting-started.html|
+
+
+## 图标库
+|名称|地址|
+|:---:|:---:|
+|iconfont| https://www.iconfont.cn/?spm=a313x.collections_index.i3.d4d0a486a.64773a81Vz3jjq|
+|Iconbox|https://arco.design/iconbox/libs|
+|IconPark|https://iconpark.oceanengine.com/home|
