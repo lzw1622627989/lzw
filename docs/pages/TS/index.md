@@ -112,13 +112,9 @@ str1.toUpperCase(); //⽆警告
 let str2: any = "hello";
 str2.toUpperCase(); //⽆警告
 let str3: unknown = "hello";
-str3
-  .toUpperCase()(
-    //警告：“str3”的类型为“未知”
-    // 使⽤断⾔强制指定str3的类型为string
-    str3 as string
-  )
-  .toUpperCase(); //⽆警告
+str3.toUpperCase()  //警告：“str3”的类型为“未知” 
+// 使⽤断⾔强制指定str3的类型为string
+(str3 as string).toUpperCase(); //⽆警告
 ```
 
 - never

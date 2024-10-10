@@ -50,6 +50,7 @@ export const sidebarList: DefaultTheme.Sidebar = {
         { text: "安装", link: "/JS/Radash/" },
         { text: "Array数组", link: "/JS/Radash/array.md" },
         { text: "Object对象", link: "/JS/Radash/object.md" },
+        { text: "Curry 柯里化", link: "/JS/Radash/curry.md" },
       ],
     },
   ],
