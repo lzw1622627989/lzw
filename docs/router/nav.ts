@@ -1,6 +1,7 @@
 import { DefaultTheme } from "vitepress";
 export const navList: DefaultTheme.NavItem[] = [
   { text: "主页", link: "/" },
+  { text: "每日一学", link: "/Study/2025/03/" },
   {
     text: "导航页",
     items: [

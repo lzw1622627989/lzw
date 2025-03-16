@@ -116,4 +116,10 @@ export const sidebarList: DefaultTheme.Sidebar = {
       ],
     },
   ],
+  "/Study": [
+    {
+      text: "2025",
+      items: [{ text: "03", link: "/Study/2025/03/" }],
+    },
+  ],
 };
